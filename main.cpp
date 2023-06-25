@@ -1,5 +1,5 @@
 #include <iostream>
-#include "rv32i.h"
+#include "rv32i/rv32i.h"
 int data_ram[DATA_RAM_SIZE];
 unsigned int code_ram[CODE_RAM_SIZE] = {
 #include "binaries/text_hello_world.hex"

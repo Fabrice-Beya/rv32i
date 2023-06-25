@@ -2,12 +2,16 @@
 // Created by Fabrice Beya on 2023/06/25.
 //
 #include "rv32i.h"
-#include "fetch.h"
+#include "../fetch/fetch.h"
+#include "../decode/decode.h"
+#include "../disassemble/disassemble.h"
+#include "../config.h"
+
 static void running_cond_update(
         instruction_t  instruction,
         code_address_t pc,
         bit_t         *is_running){
-    *is_running = (instruction != RET );
+    *is_running = (instruction != RET);
 }
 
 void rv32i(
@@ -21,7 +25,7 @@ void rv32i(
     int reg_file[NB_REGISTER];
     instruction_t instruction;
     unsigned int nbi;
-    decoded_immediate_t d_i;
+    decoded_instruction_t d_i;
 
     // Initialise states
     pc = start_pc;
@@ -29,6 +33,10 @@ void rv32i(
     nbi = 0;
     do {
         fetch(pc, code_ram, &instruction);
+        decode(instruction, &d_i);
+#ifdef DEBUG_DISASSEMBLE
+        disassemble(pc, instruction, d_i);
+#endif
         running_cond_update(instruction, pc, &is_running);
         pc++;
     } while(is_running);

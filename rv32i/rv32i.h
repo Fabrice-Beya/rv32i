@@ -5,7 +5,7 @@
 #ifndef RV32I_RV32I_H
 #define RV32I_RV32I_H
 
-#include "include/ap_int.h"
+#include "../include/ap_int.h"
 using namespace std;
 
 /*
@@ -37,10 +37,10 @@ using namespace std;
 #define NB_REGISTER (1<<LOG_REG_FILE_SIZE)
 
 // Include all the rv32i instruction op codes
-#include "op_codes.h"
+#include "../include/op_codes.h"
 
 // Include all rev32i commands
-#include "commands.h"
+#include "../include/commands.h"
 
 // Each instruction must be an unsigned 32bit value
 typedef unsigned int instruction_t;

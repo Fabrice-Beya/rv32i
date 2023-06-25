@@ -4,7 +4,7 @@
 
 #ifndef RV32I_FETCH_H
 #define RV32I_FETCH_H
-#include "rv32i.h"
+#include "../rv32i/rv32i.h"
 
 void fetch(
         code_address_t pc,
