@@ -5,8 +5,7 @@
 #ifndef RV32I_RV32I_H
 #define RV32I_RV32I_H
 
-#include <bitset>
-
+#include "include/ap_int.h"
 using namespace std;
 
 /*
@@ -48,17 +47,17 @@ typedef unsigned int instruction_t;
 
 // Each address in memory needs to be at most LOG_CODE_RAM_SIZE wide ie all code address will be in the
 // range of [0 - 2^LOG_CODE_RAM_SIZE] thus we only need a data type that stores up to LOG_CODE_RAM_SIZE bits.
-typedef bitset<LOG_CODE_RAM_SIZE> code_address_t;
+typedef ap_uint<LOG_CODE_RAM_SIZE> code_address_t;
 
 // Similarly with word referenced data address
-typedef bitset<LOG_CODE_RAM_SIZE> w_data_address_t;
+typedef ap_uint<LOG_CODE_RAM_SIZE> w_data_address_t;
 
 // Half words referenced addressed will need a range of 2 times that of the range for words. ie half word = 2 * words
 // In binary increasing a bit width by 1 is the same as multiplying by 2
-typedef bitset<LOG_CODE_RAM_SIZE+1> h_data_address_t;
+typedef ap_uint<LOG_CODE_RAM_SIZE+1> h_data_address_t;
 
 // Similarly increasing bit width by 2 is same as multiplying by 4 ie byte referenced addressed need 4 times that of the range for words.
-typedef bitset<LOG_CODE_RAM_SIZE+2> b_data_address_t;
+typedef ap_uint<LOG_CODE_RAM_SIZE+2> b_data_address_t;
 
 // Instruction type definitions all opcodes are mapped to one of the types below
 #define UNDEFINED_TYPE 0
@@ -71,33 +70,33 @@ typedef bitset<LOG_CODE_RAM_SIZE+2> b_data_address_t;
 #define OTHER_TYPE     7
 
 // Used to capture the instruction type, there are up to 8, thus 3 bits is needed to capture than all.
-typedef bitset<3> type_t;
+typedef ap_uint<3> type_t;
 
 // All immediate values can have up to 20 bits(eg U-TYPES). A right shift can be done to accommodate small sizes.
-typedef bitset<20> immediate_t;
+typedef ap_int<20> immediate_t;
 
 // Each instruction type will have different sizes for immediate values accordingly.
-typedef bitset<12> i_immediate_t;
-typedef bitset<12> s_immediate_t;
-typedef bitset<12> b_immediate_t;
-typedef bitset<20> u_immediate_t;
-typedef bitset<20> j_immediate_t;
+typedef ap_int<12> i_immediate_t;
+typedef ap_int<12> s_immediate_t;
+typedef ap_int<12> b_immediate_t;
+typedef ap_int<20> u_immediate_t;
+typedef ap_int<20> j_immediate_t;
 
 // All op codes will have 5 bits ie bits 2-7 of any instruction
-typedef bitset<5> opcode_t;
+typedef ap_uint<5> opcode_t;
 
 // This type will capture all register values inside an instruction they are always LOG_REG_FILE_SIZE wide
 // ie this will be a value between 0 - 31
-typedef bitset<LOG_REG_FILE_SIZE> reg_num_t;
+typedef ap_uint<LOG_REG_FILE_SIZE> reg_num_t;
 
 // This type will capture the function 3 bits of an instruction
-typedef bitset<3> func3_t;
+typedef ap_uint<3> func3_t;
 
 // This type will capture the function 7 bits of an instruction
-typedef bitset<7> func7_t;
+typedef ap_uint<7> func7_t;
 
 // This type will capture any single bit value in an instruction
-typedef bitset<1> bit_t;
+typedef ap_uint<1> bit_t;
 
 /*
  * This type captures all possible data that cab be extracted from a 32 bit instruction.
@@ -132,11 +131,11 @@ typedef struct decoded_instruction_t {
  */
 typedef struct decoded_immediate_t {
     bit_t inst_31;
-    bitset<6> inst_30_25;
-    bitset<4> inst_24_21;
+    ap_uint<6> inst_30_25;
+    ap_uint<4> inst_24_21;
     bit_t inst_20;
-    bitset<8> inst_19_12;
-    bitset<4> inst_11_8;
+    ap_uint<8> inst_19_12;
+    ap_uint<4> inst_11_8;
     bit_t inst_7;
 } decoded_immediate_t;
 

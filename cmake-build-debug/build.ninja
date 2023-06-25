@@ -61,6 +61,12 @@ build CMakeFiles/rv32i.dir/rv32i.cpp.o: CXX_COMPILER__rv32i_Debug /Users/fabrice
   OBJECT_DIR = CMakeFiles/rv32i.dir
   OBJECT_FILE_DIR = CMakeFiles/rv32i.dir
 
+build CMakeFiles/rv32i.dir/fetch.cpp.o: CXX_COMPILER__rv32i_Debug /Users/fabrice.beya/CLionProjects/rv32i/fetch.cpp || cmake_object_order_depends_target_rv32i
+  DEP_FILE = CMakeFiles/rv32i.dir/fetch.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk -std=gnu++14
+  OBJECT_DIR = CMakeFiles/rv32i.dir
+  OBJECT_FILE_DIR = CMakeFiles/rv32i.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target rv32i
@@ -69,7 +75,7 @@ build CMakeFiles/rv32i.dir/rv32i.cpp.o: CXX_COMPILER__rv32i_Debug /Users/fabrice
 #############################################
 # Link the executable rv32i
 
-build rv32i: CXX_EXECUTABLE_LINKER__rv32i_Debug CMakeFiles/rv32i.dir/main.cpp.o CMakeFiles/rv32i.dir/rv32i.cpp.o
+build rv32i: CXX_EXECUTABLE_LINKER__rv32i_Debug CMakeFiles/rv32i.dir/main.cpp.o CMakeFiles/rv32i.dir/rv32i.cpp.o CMakeFiles/rv32i.dir/fetch.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk
   OBJECT_DIR = CMakeFiles/rv32i.dir
   POST_BUILD = :

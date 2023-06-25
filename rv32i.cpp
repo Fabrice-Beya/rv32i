@@ -2,6 +2,13 @@
 // Created by Fabrice Beya on 2023/06/25.
 //
 #include "rv32i.h"
+#include "fetch.h"
+static void running_cond_update(
+        instruction_t  instruction,
+        code_address_t pc,
+        bit_t         *is_running){
+    *is_running = (instruction != RET );
+}
 
 void rv32i(
         unsigned int start_pc,
@@ -21,6 +28,8 @@ void rv32i(
     for (int i=0; i<NB_REGISTER; i++) reg_file[i] = 0;
     nbi = 0;
     do {
-
-    } while(is_running == true);
+        fetch(pc, code_ram, &instruction);
+        running_cond_update(instruction, pc, &is_running);
+        pc++;
+    } while(is_running);
 }
