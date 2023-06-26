@@ -9,7 +9,7 @@ A C/C++ RiscV 32bit processor implementation based on Guide to Computer Processo
     }`
 
 3. After running the main application you'll see your disassembled application along with register. Below is sample Hello World application:
-      
+   
    0000: 00500593      
    li x11, 5
    
