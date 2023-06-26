@@ -5,15 +5,19 @@
 #include "../fetch/fetch.h"
 #include "../decode/decode.h"
 #include "../disassemble/disassemble.h"
+#include "../execute//execute.h"
 #include "../config.h"
 
 static void running_cond_update(
         instruction_t  instruction,
         code_address_t pc,
         bit_t         *is_running){
-    *is_running = (instruction != RET);
+    *is_running = (instruction != RET || pc != 0);
 }
-
+static void statistic_update(
+        unsigned int *nbi){
+    *nbi = *nbi + 1;
+}
 void rv32i(
         unsigned int start_pc,
         unsigned int code_ram[CODE_RAM_SIZE],
@@ -37,7 +41,12 @@ void rv32i(
 #ifdef DEBUG_DISASSEMBLE
         disassemble(pc, instruction, d_i);
 #endif
+        execute(pc, reg_file, data_ram, d_i, &pc);
+        statistic_update(&nbi);
         running_cond_update(instruction, pc, &is_running);
-        pc++;
     } while(is_running);
+    *nb_instructions = nbi;
+#ifdef DEBUG_REG_FILE
+    print_reg(reg_file);
+#endif
 }

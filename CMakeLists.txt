@@ -13,4 +13,4 @@ add_executable(
         fetch/fetch.cpp
         fetch/fetch.h
         binaries/text_hello_world.hex
-        decode/decode.cpp decode/decode.h include/type.h include/type.cpp include/immediate.h include/immediate.cpp disassemble/disassemble.h disassemble/disassemble.cpp print/print.h print/print.cpp config.h)
+        decode/decode.cpp decode/decode.h include/type.h include/type.cpp include/immediate.h include/immediate.cpp disassemble/disassemble.h disassemble/disassemble.cpp print/print.h print/print.cpp config.h execute/execute.cpp execute/execute.h)
